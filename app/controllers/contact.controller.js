@@ -25,9 +25,12 @@ exports.findAll = async (req, res, next) => {
 
     try {
         const contactService = new ContactService(MongoDB.client);
-        const { name } = req.query;
+        const { name , address } = req.query;
+        
         if (name) {
             documents = await contactService.findByName(name);
+        } else if (address) {
+            documents = await contactService.findByAddress(address);
         } else {
             documents = await contactService.find({});
         }
@@ -39,7 +42,6 @@ exports.findAll = async (req, res, next) => {
 
     return res.send(documents);
 };
-
 
 // Find a single contact with an id
 exports.findOne = async (req, res, next) => {

@@ -38,7 +38,12 @@ class ContactService {
     async findByName(name) {
         return await this.find({
             name: { $regex: new RegExp(name), $options: "i" },
-           
+        });
+    }
+
+    async findByAddress(address) {
+        return await this.find({
+            address: { $regex: new RegExp(address), $options: "i" },
         });
     }
 
